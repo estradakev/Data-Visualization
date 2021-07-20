@@ -1,0 +1,86 @@
+<!DOCTYPE>
+<html lang="en">
+  <head>
+    <title>Encrypt-It!</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <h1>Encrypt-It!</h1>
+      <h2>Translate any text message into a super-secret cipher!</h2>
+    </header>
+    <main>
+      <fieldset>
+        <legend>Text to Encrypt</legend>
+        <textarea id="input-text" rows="10" cols="60" 
+         placeholder="Enter your message to encrypted here"></textarea>
+      </fieldset>
+      <fieldset>
+        <legend>Encrypt Options</legend>
+
+        <p>
+          <strong>Cipher Type: </strong>
+          <select id="cipher-type">
+            <option value="shift">Shift Cipher</option>
+            <option value="random">Randomized</option>
+          </select>
+        </p>
+
+        <p>
+          <strong>Font Size: </strong>
+          <label>
+            <input checked type="radio" name="text-size" value="12pt">12pt</input>
+          </label>
+          <label>
+            <input type="radio" name="text-size" value="24pt">24pt</input>
+          </label>
+        </p>
+        
+        <p>
+          <label>
+            <strong>All-Caps:</strong>
+            <input id="all-caps" type="checkbox" name="uppercase-ouput" value="uppercase"/>
+          </label>
+        </p>
+
+        <button id="encrypt-it" onclick="handleClick()" >Encrypt It!</button>
+        <button id="reset">Reset</button>
+      </fieldset>
+
+      <div id="result-area">
+        <h2>Result:</h2>
+        <p id="result"></p>
+      </div>
+    </main>
+    <!-- <script  src="encrypt-it.js"></script> -->
+    <script>
+      let original = "yz{abcdefg"
+      let shift = 1;
+
+      function startEncryption(){
+        let encryptedMsg = "";
+        for(letter of original){
+          encryptedMsg += shiftLetter(letter, shift);
+        }
+        console.log(encryptedMsg);
+      }
+      startEncryption();
+
+      function shiftLetter(letter, shift){
+        let newLetter = "";
+        let letterCode = letter.charCodeAt(0);
+        let newLetterCode = letterCode + shift;
+        if(newLetterCode == 122 ){
+          newLetter = 97;
+        }else if(newLetterCode < 97){
+          newLetter += 26;
+        } 
+        else if(newLetterCode > 122){
+          newLetter -= 26;
+        }
+        newLetter = String.fromCharCode(newLetterCode);
+        return newLetter;
+      }
+    </script>
+  </body>
+</html>
